@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minimalistic Profile with Timeline</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: Georgia, serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10rem 0;
+      max-width: 1000px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1.2s ease-out 0.5s forwards;
+    }
+
+    .bio {
+      flex: 1;
+      padding-right: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.7;
+    }
+
+    /* Profile photo loading transition */
+    .profile-photo {
+    width: 350px;
+    height: 450px;
+    border-radius: 30px;
+    object-fit: cover;
+    /* border: 2px solid #ccc; */
+    background-color: white;
+    opacity: 0;
+    transition: opacity 1s ease;
+    }
+
+    /* Class added when image has loaded */
+    .profile-photo.loaded {
+    opacity: 1;
+    }
+
+    .timeline {
+      max-width: 800px;
+      margin: 5rem auto 2rem;
+    }
+
+    .timeline h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      border-left: 3px solid #aaa;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item h3 {
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .bio {
+        padding: 0;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .portfolio {
+        max-width: 1000px;
+        margin: 5rem auto 2rem;
+        padding: 0 1rem;
+        }
+
+        .portfolio h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        }
+
+        .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        }
+
+        .portfolio-item {
+        display: block;
+        overflow: hidden;
+        border-radius: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        display: block;
+        }
+
+        .portfolio-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .portfolio-item:hover img {
+        transform: scale(1.05);
+        }
+
+  </style>
+</head>
+<body>
+  <header>yedam jang</header>
+  <div class="container">
+    <div class="bio">
+      <p>Korean fashion designer in LA. Passion for quality clothing, obsession with detail. Avid rock climber. </p>
+    </div>
+    <img src="profile.png" alt="Profile Photo" class="profile-photo" onload="this.classList.add('loaded')" />
+</div>
+
+  <section class="timeline">
+    <h2>Timeline</h2>
+
+    <div class="timeline-item">
+      <h3>2025 – Started Freelancing</h3>
+      <p>Began offering design and development services to small businesses and startups.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>2023 – Received Green Card</h3>
+      <p>Worked with a team on branding, UX/UI, and web apps for international clients.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>2022 – Joined reflex</h3>
+      <p>Released my first solo product: a minimalist site builder for creators.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3>2018 – Moved to America</h3>
+        <p>Released my first solo product: a minimalist site builder for creators.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3>2018 – Graduated Pyeongtaek University</h3>
+        <p>Released my first solo product: a minimalist site builder for creators.</p>
+    </div>
+  </section>
+
+
+  <section class="portfolio">
+    <h2>Portfolio</h2>
+    <div class="portfolio-grid">
+      <a href="#" class="portfolio-item">
+        <img src="sweatshirts1.jpeg" alt="Project 1">
+      </a>
+      <a href="#" class="portfolio-item">
+        <img src="sweatshirts2.jpeg" alt="Project 2">
+      </a>
+      <a href="#" class="portfolio-item">
+        <img src="sweatshirts3.jpeg" alt="Project 3">
+      </a>
+    </div>
+  </section>
+
+  <script>
+    // Fade in timeline items on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 1 }
+    );
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      observer.observe(item);
+    });
+  </script>
+</body>
+</html>
